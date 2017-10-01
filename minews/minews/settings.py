@@ -14,6 +14,9 @@ BOT_NAME = 'minews'
 SPIDER_MODULES = ['minews.spiders']
 NEWSPIDER_MODULE = 'minews.spiders'
 
+#log level
+# LOG_LEVEL = 'DEBUG'
+LOG_LEVEL = 'ERROR'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'minews (+http://www.yourdomain.com)'

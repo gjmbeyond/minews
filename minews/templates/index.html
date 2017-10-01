@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Index{% endblock %}
+{% block head %}
+<link rel="stylesheet" href="{{ url_for('static', filename='style/bootstrap-table.min.css') }}" />
+<script src="{{ url_for('static', filename='js/index.js') }}"></script>
+<script src="{{ url_for('static', filename='js/bootstrap-table.min.js') }}"></script>
+{% endblock %}
+{% block content %}
+<div style="text-align: center;">
+    <div style="display: inline-block;">
+        <h1>刷新新闻</h1>
+        <div>
+            <table id="result_table"></table>
+        </div>
+    </div>
+</div>
+<p id="favicon_path" style="display: none;">{{ url_for('static', filename='favicon/favicon.ico') }}</p>
+{% endblock %}
