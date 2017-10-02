@@ -36,9 +36,10 @@ class IthomeSpider(Spider):
     targets = [u'小米', u'红米']
     result = []
 
-    def __init__(self, param1=None, *args, **kwargs):
+    def __init__(self, filter='小米,红米', *args, **kwargs):
         super(IthomeSpider, self).__init__(*args, **kwargs)
         self.start_urls = ['https://www.ithome.com/blog.htm']
+        self.targets = filter.split(',')
     
     def start_requests(self):
         yield scrapy.FormRequest(self.start_urls[0], headers=self.headers, callback=self.parse_content)

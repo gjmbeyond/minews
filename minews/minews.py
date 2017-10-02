@@ -1,6 +1,7 @@
 #coding=utf8
 from flask import Flask
 from flask import render_template
+from flask import request
 import json
 from task_manager import IthomeSpiderProcess
 import os
@@ -24,7 +25,9 @@ def grab_ithome():
     #     'url': '#',
     #     'category': '小米'
     # }
-    process = IthomeSpiderProcess()
+    filter = request.args.get('filter', '小米,红米')
+    words = filter.split(',')
+    process = IthomeSpiderProcess(filter=filter)
     process.start()
     process.join()
     fp = 'output/result.json'
@@ -40,6 +43,10 @@ def grab_ithome():
                         break
             if append_flag:
                 info.append(item)
+    for i in info:
+        if i.has_key('category'):
+            if i['category'] not in words:
+                info.remove(i)
     return json.dumps(info)
 
 if __name__ == '__main__':

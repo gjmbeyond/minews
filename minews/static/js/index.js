@@ -1,21 +1,48 @@
 
 console.log($);
 
+var current_length = 0;
+
 $(document).ready(function() {
     console.log("enter document ready");
     grab_ithome();
 });
 
 function grab_ithome() {
+    var filter = $("#filter").val();
     $.ajax({
-        url: '/grab_ithome',
+        url: '/grab_ithome?filter='+filter,
         method: 'get',
         success: function(data) {
             data = $.parseJSON(data);
             console.log(data);
             draw_result_table(data);
-            pop_up_notification('有新消息哦', '您有新的消息，请查收');
+            if (current_length < data.length) {
+                pop_up_notification('有新消息哦', '您有新的消息，请查收');
+                current_length = data.length;
+            } else if (current_length > data.length) {
+                current_length = data.length;
+            }
             setTimeout('grab_ithome();', 30000);
+        }
+    });
+}
+
+function grab_ithome_once() {
+    var filter = $("#filter").val();
+    $.ajax({
+        url: '/grab_ithome?filter='+filter,
+        method: 'get',
+        success: function(data) {
+            data = $.parseJSON(data);
+            console.log(data);
+            draw_result_table(data);
+            if (current_length < data.length) {
+                pop_up_notification('有新消息哦', '您有新的消息，请查收');
+                current_length = data.length;
+            } else if (current_length > data.length) {
+                current_length = data.length;
+            }
         }
     });
 }

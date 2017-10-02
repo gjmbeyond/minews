@@ -8,7 +8,11 @@
 {% block content %}
 <div style="text-align: center;">
     <div style="display: inline-block;">
-        <h1>刷新新闻</h1>
+        <h1>刷刷IT之家新闻</h1>
+        <div>
+            filter: <input type="text" id="filter" value="小米,红米,微软,阿里,苹果,游戏"/>
+            <button id="refresh" onclick="grab_ithome_once();">Refresh</button>
+        </div>
         <div>
             <table id="result_table"></table>
         </div>
